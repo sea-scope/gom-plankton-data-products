@@ -24,13 +24,13 @@ if (.Platform$OS.type == "windows") {
   if (DATA_DIR == "") stop("Set SEASCOPE_DATA in ~/.Renviron to the sea-scope-data folder (see settings.R).")
 }
 
-## DFO Calanus model files (step 1 of run_spm_biomass.R)
+## DFO Calanus model files (step 1 of spm_biomass/run_spm_biomass.R)
 DFO_RDS_DIR <- file.path(DATA_DIR, "dfo_bioenergy_3d")
 
-## Satellite download cache (run_satellite.R, ingest step)
+## Satellite download cache (satellite/run_satellite.R, ingest step)
 SATELLITE_CACHE_DIR <- file.path(DATA_DIR, "satellite_erddap_cache")
 
-## Raw sentinel station spreadsheets (run_sentinel.R). Read from the WHOI
+## Raw sentinel station spreadsheets (sentinel/run_sentinel.R). Read from the WHOI
 ## OneDrive on CT's Windows machine; anywhere else set SEASCOPE_UBER, or copy
 ## the files to sea-scope-data/sentinel_uber.
 if (.Platform$OS.type == "windows") {
@@ -40,5 +40,5 @@ if (.Platform$OS.type == "windows") {
   SENTINEL_UBER_DIR <- Sys.getenv("SEASCOPE_UBER", unset = file.path(DATA_DIR, "sentinel_uber"))
 }
 
-## Raw CPR tows, Western Scotian Shelf (R/05_cpr/cpr_01_load.R). Not public.
+## Raw CPR tows, Western Scotian Shelf (cpr/R/cpr_01_load.R). Not public.
 CPR_TOWS_FILE <- file.path(DATA_DIR, "cpr", "WSS_data_per_tow.csv")

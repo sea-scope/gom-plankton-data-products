@@ -187,7 +187,7 @@
 <div class="main">
   <div class="left-panel">
     <div class="map-panel">
-      <img src="../figures/DFO_region_map_CINAR.png" alt="CINAR region map">
+      <img src="../geography/figures/DFO_region_map_CINAR.png" alt="CINAR region map">
     </div>
     <div class="plot-panel">
       <img id="figure" alt="Satellite climatology figure">
@@ -262,7 +262,7 @@
     var v = elVar.value;
     var y = elYear.value;
     // File pattern: plots/satellite/{set}/{set}_{polygon_id}_{variable}_{year}.png
-    var path = "../plots/satellite/" + r.set + "/" + r.set + "_" + r.polygon_id + "_" + v + "_" + y + ".png";
+    var path = "plots/" + r.set + "/" + r.set + "_" + r.polygon_id + "_" + v + "_" + y + ".png";
     elImg.style.display = "";
     elNoData.style.display = "none";
     elImg.src = path;

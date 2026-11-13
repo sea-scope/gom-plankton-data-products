@@ -183,7 +183,7 @@
 <div class="main">
   <div class="left-panel">
     <div class="map-panel">
-      <img src="../figures/DFO_region_map_SBNMS.png" alt="Western Gulf of Maine — Time Series Stations, EcoMon Strata, and SBNMS">
+      <img src="../geography/figures/DFO_region_map_SBNMS.png" alt="Western Gulf of Maine — Time Series Stations, EcoMon Strata, and SBNMS">
     </div>
     <div class="plot-panel">
       <img id="figure" alt="Sentinel indicator figure">
@@ -338,7 +338,7 @@
 
   /* Try to load live dashboard CSV, fall back to embedded */
   function loadDashboardCSV() {
-    fetch("../summaries/sentinel/sentinel_dashboard.csv")
+    fetch("summaries/sentinel_dashboard.csv")
       .then(function (r) { return r.text(); })
       .then(function (text) {
         var rows = text.trim().split("\n");
@@ -383,10 +383,10 @@
     /* Build image path */
     var path;
     if (plottype === "phenology") {
-      path = "../plots/sentinel/" + station + "/" + station + "_" + variable + "_phenology.png";
+      path = "plots/" + station + "/" + station + "_" + variable + "_phenology.png";
     } else {
       var season = plottype.replace("anomaly_", "");
-      path = "../plots/sentinel/" + station + "/" + station + "_" + variable + "_anomaly_bar_" + season + ".png";
+      path = "plots/" + station + "/" + station + "_" + variable + "_anomaly_bar_" + season + ".png";
     }
 
     elImg.style.display = "";

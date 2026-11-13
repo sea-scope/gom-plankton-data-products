@@ -4,20 +4,18 @@
 .Rproj.user/
 
 # Rebuilt by the pipelines
-/cache/
-/processed/
-/polygons/
+*/cache/
+/spm_biomass/processed/
+/spm_biomass/polygons/
 
 # Raw inputs: they live outside the repo (settings.R); local copies are never committed
-/Bioenergy_3D/
-/data/satellite/raw/
-/data/sentinel/raw/
-/data/cpr/tows/
+/sentinel/data/raw/
+/cpr/data/tows/
 
 # Web viewer images for the DFO biomass and satellite products: re-rendered at
 # 150 dpi on the next full pipeline run, then committed (2026-11-13)
-/plots/spm_biomass/*/
-/plots/satellite/*/
+/spm_biomass/plots/*/
+/satellite/plots/*/
 
 # OS clutter
 .DS_Store

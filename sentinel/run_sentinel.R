@@ -1,0 +1,71 @@
+## run_sentinel.R
+## Orchestrator for the Sentinel Indicators pipeline.
+## Open gom-plankton-data-products.Rproj before running so that
+## getwd() resolves to the repo root.
+
+# =============================================================================
+# Configuration
+# =============================================================================
+
+# Path to the directory containing UBER and MBON Excel files (set in settings.R)
+source("settings.R")
+uber_dir <- SENTINEL_UBER_DIR
+
+# Stations to process
+stations <- c("WBTS", "CMTS")
+
+# =============================================================================
+# Step 1: Station config
+# =============================================================================
+
+source("sentinel/R/station_config.R")
+
+# =============================================================================
+# Step 2: Ingest — read raw Excel, write standardized CSVs
+# =============================================================================
+
+source("sentinel/R/ingest_station_data.R")
+
+for (stn in stations) {
+  cat("\n===== Ingesting", stn, "=====\n")
+  ingest_station(stn, source = "excel", uber_dir = uber_dir)
+}
+
+# =============================================================================
+# Step 3: Prepare — filter, QC, derived variables, seasons
+# =============================================================================
+
+source("sentinel/R/prepare_station_data.R")
+
+for (stn in stations) {
+  cat("\n===== Preparing", stn, "=====\n")
+  prepare_station(stn)
+}
+
+# =============================================================================
+# Step 4: Analysis (WP4b) — GAMs, baselines, anomalies
+# =============================================================================
+
+source("sentinel/R/analyze_station_data.R")
+
+cat("\n===== Fitting GAMs, generating predictions, and saving diagnostics =====\n")
+fit_results <- analyze_all_stations(stations = stations)
+
+# =============================================================================
+# Step 5: Figures (WP4c) — phenology, seasonal, anomaly plots + metadata JSON
+# =============================================================================
+# Figure generation is integrated into analyze_all_stations() (Step 4).
+# Phenology, seasonal trend, and anomaly time series PNGs are saved to
+# sentinel/plots/{station}/. Sentinel metadata JSON is exported to
+# sentinel/plots/sentinel_metadata.json.
+
+# =============================================================================
+# Step 6: Presentation and poster figures (WBTS)
+# =============================================================================
+# Reads the files written in Step 4. Writes 16:9 slide versions to
+# sentinel/plots/WBTS/presentation/ and poster-slot versions to
+# sentinel/plots/WBTS/poster/.
+
+source("sentinel/R/plot_presentation_poster_wbts.R")
+
+cat("\n===== Sentinel pipeline complete =====\n")
