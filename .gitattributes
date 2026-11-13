@@ -1,0 +1,13 @@
+# Normalise line endings across Windows and macOS
+* text=auto
+*.R text eol=lf
+*.md text eol=lf
+*.html text eol=lf
+*.csv text
+*.png binary
+*.jpg binary
+*.pdf binary
+*.rds binary
+*.rda binary
+*.mat binary
+*.nc binary
